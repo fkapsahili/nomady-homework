@@ -1,21 +1,23 @@
-import { StyleSheet, Text, Platform, StatusBar } from "react-native";
+import { StyleSheet, Text, Platform, StatusBar, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { ProfileList } from "../components/ProfileList";
+import { ResultList } from "../components/ResultList";
 import Colors from "../constants/Colors";
 
 export default function GitHubProfilesScreen() {
   return (
     <SafeAreaView style={styles.container}>
-      <ProfileList />
-      <Text
-        style={{
-          marginTop: 10,
-          color: Colors.dark.text,
-        }}
-      >
-        This is just a text that should not get shifted or covered by the
-        Flatlist.
-      </Text>
+      <ResultList />
+      <View style={styles.content}>
+        <Text
+          style={{
+            marginTop: 10,
+            color: Colors.dark.text,
+          }}
+        >
+          This is just a text that should not get shifted or covered by the
+          Flatlist.
+        </Text>
+      </View>
     </SafeAreaView>
   );
 }
@@ -27,5 +29,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.background,
     paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     paddingHorizontal: 20,
+  },
+  content: {
+    paddingTop: 50,
   },
 });

@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useState } from "react";
-import { FlatList, Linking, StyleSheet, View } from "react-native";
+import { FlatList, Keyboard, Linking, StyleSheet, View } from "react-native";
 import Layout from "../constants/Layout";
 import { api } from "../lib/api";
-import { Autocomplete } from "./Autocomplete";
-import { GithubUser } from "./GithubUser";
+import { Input } from "./Input";
+import { Result } from "./Result";
 
 export type GitHubProfile = {
   avatar_url: string;
@@ -17,7 +17,7 @@ type FlatListItem = {
   index: number;
 };
 
-export const ProfileList: React.FC<{}> = ({}) => {
+export const ResultList: React.FC<{}> = ({}) => {
   const [data, setData] = useState<GitHubProfile[]>([]);
 
   const handleSearch = async (username: string) => {
@@ -41,6 +41,8 @@ export const ProfileList: React.FC<{}> = ({}) => {
     Linking.canOpenURL(user?.html_url).then((supported) => {
       if (supported) {
         Linking.openURL(user.html_url);
+        Keyboard.dismiss();
+        setData([]);
       } else {
         console.log("Unsupported Linking URI: ", user?.html_url);
       }
@@ -48,14 +50,12 @@ export const ProfileList: React.FC<{}> = ({}) => {
   };
 
   const renderItem = ({ item, index }: FlatListItem) => {
-    return (
-      <GithubUser key={index} user={item} onClick={() => handleClick(item)} />
-    );
+    return <Result key={index} user={item} onClick={() => handleClick(item)} />;
   };
 
   return (
     <View style={styles.container}>
-      <Autocomplete
+      <Input
         onSearch={({ value }) => {
           handleSearch(value);
         }}
@@ -79,7 +79,9 @@ export const ProfileList: React.FC<{}> = ({}) => {
 
 const styles = StyleSheet.create({
   container: {
-    position: "relative",
+    position: "absolute",
+    top: 50,
+    bottom: 0,
     width: "100%",
     zIndex: 10,
   },

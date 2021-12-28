@@ -1,13 +1,13 @@
 import { Image, Text, TouchableOpacity, StyleSheet } from "react-native";
 import Colors from "../constants/Colors";
-import { GitHubProfile } from "./ProfileList";
+import { GitHubProfile } from "./ResultList";
 
-type GithubUserProps = {
+type ResultProps = {
   user: GitHubProfile;
   onClick: () => void;
 };
 
-export const GithubUser: React.FC<GithubUserProps> = ({ user, onClick }) => {
+export const Result: React.FC<ResultProps> = ({ user, onClick }) => {
   return (
     <TouchableOpacity onPress={onClick} style={styles.listItem}>
       <Image style={styles.avatar} source={{ uri: user?.avatar_url }} />

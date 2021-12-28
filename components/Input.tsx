@@ -9,13 +9,13 @@ import {
 import { useDebouncedValue } from "../hooks/useDebouncedValue";
 import { TabBarIcon } from "./TabBarIcon";
 
-type AutocompleteProps = {
+type InputProps = {
   onSearch: ({ value }: { value: string }) => void;
   onClear: () => void;
   disabled?: boolean;
 };
 
-export const Autocomplete: React.FC<AutocompleteProps> = ({
+export const Input: React.FC<InputProps> = ({
   onSearch,
   onClear,
   disabled = false,
