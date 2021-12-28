@@ -1,7 +1,7 @@
 import axios from "axios";
+// @ts-ignore
+import { GITHUB_ACCESS_TOKEN } from "@env";
 
-// TODO: save the access token in an .env file e.g. with react-native-dotenv
-const ACCESS_TOKEN = "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";
 const BASE_URL = "https://api.github.com";
 
 export const api = axios.create({
@@ -9,6 +9,6 @@ export const api = axios.create({
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
     Accept: "application/json",
-    Authorization: `token ${ACCESS_TOKEN}`,
+    Authorization: `token ${GITHUB_ACCESS_TOKEN}`,
   },
 });
